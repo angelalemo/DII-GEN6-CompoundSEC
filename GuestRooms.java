@@ -18,4 +18,7 @@ public abstract class GuestRooms {
         this.contact = contact;
         this.details = details;
     }
+
+    public void checkin(){
+    }
 }
