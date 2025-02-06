@@ -27,11 +27,11 @@ abstract class Card {
         this.id = id;
     }
 
-    public String getAccessLevel() {
+    public int getAccessLevel() {
         return accessLevel;
     }
 
-    public void setAccessLevel(String accessLevel) {
+    public void setAccessLevel(int accessLevel) {
         this.accessLevel = accessLevel;
     }
 
@@ -68,7 +68,8 @@ abstract class Card {
         private String role;
 
         // Constructor
-        public EmployeeCard(String username, String id, String accessLevel, String role) {
+        public EmployeeCard(String username, String id, String role) {
+            int accessLevel = 3;
             super(username, id, accessLevel);
             this.role = role;
         }
