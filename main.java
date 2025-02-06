@@ -3,9 +3,6 @@ import java.util.List;
 
 
 public class main {
-    interface AuditTrail {
-        void recordUsage(String timestamp, boolean success, String location);
-        int getUsageCount();
-        List<String> getUsageDetails();
-    }
+    Card User1 = new Card.CustomerCard("Sung kehun","456",)
+
 }
