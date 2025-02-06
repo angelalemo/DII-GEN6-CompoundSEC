@@ -3,6 +3,6 @@ import java.util.List;
 
 
 public class main {
-    Card User1 = new Card.CustomerCard("Sung kehun","456",)
+    Card User1 = new Card.CustomerCard("Sung kehun","456","");
 
 }
