@@ -4,7 +4,7 @@ class CustomerCard extends Card {
 
     public CustomerCard(String username, String id, String roomOrHall) {
         int accessLevel = 2;
-        super(username, id, accessLevel);
+        super(username, id);
         this.roomOrHall = roomOrHall;
     }
 

@@ -4,7 +4,7 @@ class EmployeeCard extends Card {
     // Constructor
     public EmployeeCard(String username, String id, String role) {
         int accessLevel = 3;
-        super(username, id, accessLevel);
+        super(username, id);
         this.role = role;
     }
 

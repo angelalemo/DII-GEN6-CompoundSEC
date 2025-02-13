@@ -2,13 +2,11 @@ abstract class Card {
     private String username;
     private String id;
     private int accessLevel;
-    private static int coust;
 
 
-    public Card(String username, String id, int accessLevel) {
+    public Card(String username, String id) {
         this.username = username;
         this.id = id;
-        this.accessLevel = accessLevel;
     }
 
     public String getUsername() {
