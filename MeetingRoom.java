@@ -2,7 +2,7 @@ class MeetingRoom extends Room {
     private String renterName;
     private String renterContact;
 
-    public MeetingRoom(String nameOrCode, String building, String accessLevel, String renterName, String renterContact) {
+    public MeetingRoom(String nameOrCode, String building, int accessLevel, String renterName, String renterContact) {
         super(nameOrCode, building, accessLevel);
         this.renterName = renterName;
         this.renterContact = renterContact;

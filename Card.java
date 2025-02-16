@@ -33,6 +33,12 @@ abstract class Card {
         this.accessLevel = accessLevel;
     }
 
+    public void Deletecard(){
+        username = null;
+        id = null;
+        accessLevel = Integer.parseInt(null);
+    }
+
     public abstract String getCardDetails();
 
 }
