@@ -8,19 +8,16 @@ class EmployeeCard extends Card {
         this.role = role;
     }
 
-    public String getRole() {
-        return role;
-    }
-
     public void setRole(String role) {
         this.role = role;
     }
 
-    @Override
+    public void deleteCard(){
+        super.deleteCard();
+        role = null;
+    }
+
     public String getCardDetails() {
-        return "Employee Card - Username: " + getUsername() +
-                ", ID: " + getId() +
-                ", Access Level: " + getAccessLevel() +
-                ", Role: " + role;
+        return super.toString() + ", Role: " + role;
     }
 }

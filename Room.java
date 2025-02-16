@@ -1,12 +1,12 @@
 abstract class Room {
-    private String nameOrcode;
+    private String nameOrCode;
     private String building;
     private int accessLevel;
 
 
     // Constructor
     public Room(String nameOrCode, String building,int accessLevel) {
-        this.nameOrcode = nameOrCode;
+        this.nameOrCode = nameOrCode;
         this.building = building;
         this.accessLevel = accessLevel;
     }
@@ -19,17 +19,17 @@ abstract class Room {
         this.building = building;
     }
 
-    public void setNameOrcode(String nameOrcode) {
-        this.nameOrcode = nameOrcode;
+    public void setNameOrCode(String nameOrCode) {
+        this.nameOrCode = nameOrCode;
     }
 
-    public void Deletecard(){
-        nameOrcode = null;
+    public void deleteRoom(){
+        nameOrCode = null;
         building = null;
         accessLevel = Integer.parseInt(null);
     }
 
     public String toString() {
-        return "Room: " + nameOrcode + " in " + building +
+        return "Room: " + nameOrCode + " in " + building +
                 ", Access Level: " + accessLevel;
     }}

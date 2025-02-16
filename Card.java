@@ -9,36 +9,27 @@ abstract class Card {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public void setId(String id) {
         this.id = id;
     }
 
-    public int getAccessLevel() {
-        return accessLevel;
-    }
-
     public void setAccessLevel(int accessLevel) {
         this.accessLevel = accessLevel;
     }
 
-    public void Deletecard(){
+    public void deleteCard(){
         username = null;
         id = null;
         accessLevel = Integer.parseInt(null);
     }
 
-    public abstract String getCardDetails();
-
+    public String getCardDetails() {
+        return "Customer Card - Username: " + username +
+                ", ID: " + id +
+                ", Access Level: " + accessLevel;
+    }
 }

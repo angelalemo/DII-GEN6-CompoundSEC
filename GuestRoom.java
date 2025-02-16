@@ -8,20 +8,18 @@ class GuestRoom extends Room {
         this.contactInfo = contactInfo;
     }
 
-    public String getGuestName() {
-        return guestName;
-    }
-
     public void setGuestName(String guestName) {
         this.guestName = guestName;
     }
 
-    public String getContactInfo() {
-        return contactInfo;
-    }
-
     public void setContactInfo(String contactInfo) {
         this.contactInfo = contactInfo;
+    }
+
+    public void deleteRoom(){
+        super.deleteRoom();
+        guestName = null;
+        contactInfo = null;
     }
 
     public String toString() {

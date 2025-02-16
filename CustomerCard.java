@@ -8,20 +8,17 @@ class CustomerCard extends Card {
         this.roomOrHall = roomOrHall;
     }
 
-    public String getRoomOrHall() {
-        return roomOrHall;
-    }
 
     public void setRoomOrHall(String roomOrHall) {
         this.roomOrHall = roomOrHall;
     }
 
-    @Override
+    public void deleteCard(){
+        super.deleteCard();
+        roomOrHall = null;
+    }
     public String getCardDetails() {
-        return "Customer Card - Username: " + getUsername() +
-                ", ID: " + getId() +
-                ", Access Level: " + getAccessLevel() +
-                ", Room/Hall: " + roomOrHall;
+        return super.toString() + ", Room/Hall: " + roomOrHall;
     }
 }
 
