@@ -3,7 +3,6 @@ abstract class Room {
     private String building;
     private int accessLevel;
 
-
     // Constructor
     public Room(String nameOrCode, String building,int accessLevel) {
         this.nameOrCode = nameOrCode;
