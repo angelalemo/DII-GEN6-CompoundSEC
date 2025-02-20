@@ -1,34 +1,26 @@
 abstract class Room {
     private String nameOrCode;
     private String building;
-    private int accessLevel;
+    private AccessStrategy accessStrategy;
 
     // Constructor
-    public Room(String nameOrCode, String building,int accessLevel) {
+    public Room(String nameOrCode, String building, AccessStrategy accessStrategy) {
         this.nameOrCode = nameOrCode;
         this.building = building;
-        this.accessLevel = accessLevel;
+        this.accessStrategy = accessStrategy;
     }
 
-    public void setAccessLevel(int accessLevel) {
-        this.accessLevel = accessLevel;
+    // Setters and Getters
+    public void setAccessStrategy(AccessStrategy accessStrategy) {
+        this.accessStrategy = accessStrategy;
     }
 
-    public void setBuilding(String building) {
-        this.building = building;
+    public boolean canAccess(String role) {
+        return accessStrategy.canAccess(role);
     }
 
-    public void setNameOrCode(String nameOrCode) {
-        this.nameOrCode = nameOrCode;
-    }
-
-    public void deleteRoom(){
-        nameOrCode = null;
-        building = null;
-        accessLevel = Integer.parseInt(null);
-    }
-
+    @Override
     public String toString() {
-        return "Room: " + nameOrCode + " in " + building +
-                ", Access Level: " + accessLevel;
-    }}
+        return "Room: " + nameOrCode + " in " + building;
+    }
+}

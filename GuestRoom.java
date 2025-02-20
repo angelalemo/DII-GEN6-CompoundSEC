@@ -2,8 +2,8 @@ class GuestRoom extends Room {
     private String guestName;
     private String contactInfo;
 
-    public GuestRoom(String nameOrCode, String building, int accessLevel, String guestName, String contactInfo) {
-        super(nameOrCode, building, accessLevel);
+    public GuestRoom(String nameOrCode, String building, AccessStrategy accessStrategy, String guestName, String contactInfo) {
+        super(nameOrCode, building, accessStrategy);
         this.guestName = guestName;
         this.contactInfo = contactInfo;
     }
@@ -14,12 +14,6 @@ class GuestRoom extends Room {
 
     public void setContactInfo(String contactInfo) {
         this.contactInfo = contactInfo;
-    }
-
-    public void deleteRoom(){
-        super.deleteRoom();
-        guestName = null;
-        contactInfo = null;
     }
 
     public String toString() {

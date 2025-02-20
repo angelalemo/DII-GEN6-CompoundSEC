@@ -1,35 +1,27 @@
 abstract class Card {
     private String username;
     private String id;
-    private int accessLevel;
+    private AccessCard accessCard;
 
-
-    public Card(String username, String id) {
+    public Card(String username, String id, AccessCard accessStrategy) {
         this.username = username;
         this.id = id;
+        this.accessCard = accessStrategy;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public boolean canAccess(String area) {
+        return accessCard.canAccess(area);
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getDetails() {
+        return "Card Holder: " + username + ", ID: " + id;
     }
 
-    public void setAccessLevel(int accessLevel) {
-        this.accessLevel = accessLevel;
-    }
 
     public void deleteCard(){
         username = null;
         id = null;
-        accessLevel = Integer.parseInt(null);
+        accessCard = null;
     }
-
-    public String getCardDetails() {
-        return "Customer Card - Username: " + username +
-                ", ID: " + id +
-                ", Access Level: " + accessLevel;
-    }
+    
 }
