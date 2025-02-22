@@ -3,14 +3,14 @@ abstract class Card {
     private String id;
     private AccessCard accessCard;
 
-    public Card(String username, String id, AccessCard accessStrategy) {
+    public Card(String username, String id, AccessCard accessCard) {
         this.username = username;
         this.id = id;
-        this.accessCard = accessStrategy;
+        this.accessCard = accessCard;
     }
 
-    public boolean canAccess(String area) {
-        return accessCard.canAccess(area);
+    public String canAccess() {
+        return accessCard.canAccess();
     }
 
     public String getDetails() {

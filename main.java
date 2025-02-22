@@ -3,6 +3,8 @@ import java.util.List;
 
 
 public class main {
-    Card User1 = new CustomerCard("Sung kehun","456","");
-
+    public static void main(String[] args) {
+        Room vacantRoom = new GuestRoom("101", "Building A", new VacantRoomAccess(), "Mark","0843677079");
+        System.out.println(vacantRoom.toString());
+    }
 }
