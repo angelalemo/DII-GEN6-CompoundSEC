@@ -9,10 +9,10 @@ class Owner implements AccessCard {
         String role = "owner";
         return role;}
 }
-class Tenant implements AccessCard {
+class Follower implements AccessCard {
     @Override
     public String canAccess() {
-        String role = "tenant";
+        String role = "followers";
         return role;}
 }
 class Housekeeper implements AccessCard {
@@ -39,9 +39,4 @@ class Manager implements AccessCard {
         String role = "manager";
         return role;}
 }
-class Chef implements AccessCard {
-    @Override
-    public String canAccess() {
-        String role = "chef";
-        return role;}
-}
+

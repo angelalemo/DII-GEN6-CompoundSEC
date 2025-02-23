@@ -28,7 +28,7 @@ class RentedPlaceAccess implements AccessStrategy {
     @Override
     public boolean canAccess(String role) {
         return role.equalsIgnoreCase("owner") ||
-                role.equalsIgnoreCase("tenant") ||
+                role.equalsIgnoreCase("follower") ||
                 role.equalsIgnoreCase("staff")||
                 role.equalsIgnoreCase("security") ||
                 role.equalsIgnoreCase("manager");
@@ -45,16 +45,7 @@ class StaffRoomAccess implements AccessStrategy {
                 role.equalsIgnoreCase("manager");
     }
 }
-class ChefRoomAccess implements AccessStrategy {
-    @Override
-    public boolean canAccess(String role) {
-        return role.equalsIgnoreCase("staff")||
-                role.equalsIgnoreCase("housekeeper") ||
-                role.equalsIgnoreCase("security") ||
-                role.equalsIgnoreCase("chef") ||
-                role.equalsIgnoreCase("manager");
-    }
-}
+
 class SecurityRoomAccess implements AccessStrategy {
     @Override
     public boolean canAccess(String role) {
