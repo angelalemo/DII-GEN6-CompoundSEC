@@ -10,6 +10,7 @@ abstract class Room {
         this.accessStrategy = accessStrategy;
     }
 
+
     // Setters and Getters
     public void setAccessStrategy(AccessStrategy accessStrategy) {
         this.accessStrategy = accessStrategy;

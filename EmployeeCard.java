@@ -7,6 +7,11 @@ class EmployeeCard extends Card {
         this.role = role;
     }
 
+    public EmployeeCard(){
+        super();
+        this.role = "";
+    }
+
     public void setRole(String role) {
         this.role = role;
     }

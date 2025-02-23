@@ -8,9 +8,30 @@ abstract class Card {
         this.id = id;
         this.accessCard = accessCard;
     }
+    public Card(){
+        this.username = "";
+        this.id = "";
+    }
+
 
     public String canAccess() {
         return accessCard.canAccess();
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setAccessCard(AccessCard accessCard) {
+        this.accessCard = accessCard;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getDetails() {
