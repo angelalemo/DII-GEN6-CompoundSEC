@@ -1,9 +1,12 @@
+import java.time.LocalDateTime;
+
 class EmployeeCard extends Card {
     private String role;
+    LocalDateTime now = LocalDateTime.now();
 
     // Constructor
-    public EmployeeCard(String username, String id, String role, AccessCard accessCard) {
-        super(username, id, accessCard);
+    public EmployeeCard(String username, String number, String role, AccessCard accessCard) {
+        super(username, number, accessCard);
         this.role = role;
     }
 

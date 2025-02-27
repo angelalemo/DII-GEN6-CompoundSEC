@@ -1,8 +1,8 @@
 class StaffRoom extends Room {
     private boolean restricted;
 
-    public StaffRoom(String nameOrCode, String building, AccessStrategy accessStrategy) {
-        super(nameOrCode, building, accessStrategy);
+    public StaffRoom(String nameOrCode, String ID, AccessStrategy accessStrategy) {
+        super(nameOrCode, ID, accessStrategy);
         this.restricted = true;
     }
     

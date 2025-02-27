@@ -1,16 +1,18 @@
 abstract class Card {
     private String username;
-    private String id;
+    private String number;
     private AccessCard accessCard;
 
-    public Card(String username, String id, AccessCard accessCard) {
+
+    public Card(String username, String number, AccessCard accessCard) {
         this.username = username;
-        this.id = id;
+        this.number = number;
         this.accessCard = accessCard;
     }
     public Card(){
         this.username = "";
-        this.id = "";
+        this.number = "";
+        this.accessCard = new Staff();
     }
 
 
@@ -22,27 +24,31 @@ abstract class Card {
         this.username = username;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setNumber(String Number) {
+        this.number = Number;
     }
 
     public void setAccessCard(AccessCard accessCard) {
         this.accessCard = accessCard;
     }
 
-    public String getId() {
-        return id;
+    public String getnumber() {
+        return number;
+    }
+
+    public AccessCard getAccessCard() {
+        return accessCard;
     }
 
     public String getDetails() {
-        return "Card Holder: " + username + ", ID: " + id;
+        return "Card Holder: " + username + ", ID: " + number;
     }
 
 
     public void deleteCard(){
         username = null;
-        id = null;
+        number = null;
         accessCard = null;
     }
-    
+
 }

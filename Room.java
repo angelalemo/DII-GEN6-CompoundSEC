@@ -1,17 +1,33 @@
 abstract class Room {
     private String nameOrCode;
-    private String building;
+    private String ID;
     private AccessStrategy accessStrategy;
 
     // Constructor
-    public Room(String nameOrCode, String building, AccessStrategy accessStrategy) {
+    public Room(String nameOrCode, String ID, AccessStrategy accessStrategy) {
         this.nameOrCode = nameOrCode;
-        this.building = building;
+        this.ID = ID;
         this.accessStrategy = accessStrategy;
     }
+    public Room(String nameOrCode,AccessStrategy accessStrategy){
+        this.nameOrCode = nameOrCode;
+        this.ID = "";
+        this.accessStrategy = accessStrategy;
 
+    }
 
-    // Setters and Getters
+    public void setNameOrCode(String nameOrCode){
+        this.nameOrCode = nameOrCode;
+    }
+
+    public String getNameOrCode() {
+        return nameOrCode;
+    }
+
+    public AccessStrategy getAccessStrategy() {
+        return accessStrategy;
+    }
+
     public void setAccessStrategy(AccessStrategy accessStrategy) {
         this.accessStrategy = accessStrategy;
     }
@@ -22,6 +38,6 @@ abstract class Room {
 
     @Override
     public String toString() {
-        return "Room: " + nameOrCode + " in " + building;
+        return "Room: " + nameOrCode;
     }
 }
