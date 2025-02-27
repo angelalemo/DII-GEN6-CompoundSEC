@@ -27,8 +27,6 @@ public class main {
         return NotfoundCard;
     }
 
-
-
     static void customer() {
         Scanner input = new Scanner(System.in);
         System.out.print("Username: ");
@@ -65,21 +63,24 @@ public class main {
                 System.out.println("The input is invalid.");
             }
         }
+        Scanner get = new Scanner(System.in);
         System.out.print("Room number: ");
         int x = input.nextInt();
         System.out.println("=============================================================================================================");
         if (RoomorHall.equals("room")) {
             String number = String.valueOf(x);
             System.out.print("Your ID: ");
-            String ID = input.nextLine();
-            Card slotcard = findslotcard(1);
+            String ID = get.nextLine();
+            CustomerCard slotcard = (CustomerCard) findslotcard(1);
             slotcard = new CustomerCard(name,number  , RoomorHall, new Owner(),ID);
+            slotcard.getdecryptID();
+            slotcard.getID();
         } else {
             if (owner) {
                 String number = String.valueOf(x);
                 System.out.print("Your ID: ");
-                String ID = input.nextLine();
-                Card slotcard = findslotcard(2);
+                String ID = get.nextLine();
+                CustomerCard slotcard = (CustomerCard) findslotcard(2);
                 slotcard = new CustomerCard(name, number , RoomorHall, new Owner(),ID);
                 for (int i =0 ; i<200;i++){
                     Follower[x][i].setID(ID);
@@ -245,7 +246,8 @@ public class main {
         System.out.println("1.Modify Username");
         System.out.println("2.Modify Room Number");
         System.out.println("3.New ID");
-        System.out.println("4.Delete Card");
+        System.out.println("4.Modify Access");
+        System.out.println("5.Delete Card");
         System.out.println("=============================================================================================================");
         int mod = input.nextInt();
         String change;

@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.util.Base64;
 
 class CustomerCard extends Card {
     private String roomOrHall;
@@ -13,6 +14,7 @@ class CustomerCard extends Card {
         super(username, number, accessCard);
         this.roomOrHall = roomOrHall;
         this.ID = ID;
+        encryptID();
     }
 
     public CustomerCard(){
@@ -22,10 +24,15 @@ class CustomerCard extends Card {
 
     public void setID(String id) {
         this.ID = id;
+        encryptID();
     }
 
     public String getID(){
         return ID;
+    }
+
+    public void getdecryptID(){
+        decryptID();
     }
 
     public void setRoomOrHall(String roomOrHall) {
@@ -40,5 +47,23 @@ class CustomerCard extends Card {
     public String getCardDetails() {
         return super.toString() + ", Room/Hall: " + roomOrHall;
     }
+
+    public void encryptID() {
+        if (ID != null) {
+            String encryptedID = Base64.getEncoder().encodeToString((ID + now.toString()).getBytes());
+            this.ID = encryptedID;
+        }
+    }
+
+    public void decryptID() {
+        if (ID != null) {
+                String decryptedData = new String(Base64.getDecoder().decode(ID));
+                // Remove the timestamp from the decrypted data
+                this.ID = decryptedData.substring(0, decryptedData.length() - now.toString().length());
+            } else {
+                System.out.println("Invalid encrypted data");
+            }
+        }
+
 }
 
