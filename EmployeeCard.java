@@ -15,6 +15,11 @@ class EmployeeCard extends Card {
         this.role = "";
     }
 
+    @Override
+    public String getnumber() {
+        return super.getnumber();
+    }
+
     public void setRole(String role) {
         this.role = role;
     }

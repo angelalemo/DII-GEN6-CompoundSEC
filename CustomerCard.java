@@ -6,9 +6,11 @@ class CustomerCard extends Card {
     LocalDateTime now = LocalDateTime.now();
     private String ID ;
 
+
     public CustomerCard(String username, String number, String roomOrHall, AccessCard accessCard) {
         super(username, number, accessCard);
         this.roomOrHall = roomOrHall;
+        this.ID = "1";
     }
     public CustomerCard(String username, String number, String roomOrHall, AccessCard accessCard,String ID) {
         super(username, number, accessCard);
@@ -20,6 +22,8 @@ class CustomerCard extends Card {
     public CustomerCard(){
         super();
         this.roomOrHall = "";
+        this.ID = "";
+        encryptID();
     }
 
     public void setID(String id) {
@@ -31,8 +35,9 @@ class CustomerCard extends Card {
         return ID;
     }
 
-    public void getdecryptID(){
+    public String getdecryptID(){
         decryptID();
+        return ID;
     }
 
     public void setRoomOrHall(String roomOrHall) {
@@ -65,5 +70,11 @@ class CustomerCard extends Card {
             }
         }
 
+    public void encryptID(String x) {
+        if (ID != null) {
+            String encryptedID = Base64.getEncoder().encodeToString((x + now.toString()).getBytes());
+            this.ID = encryptedID;
+        }
+    }
 }
 

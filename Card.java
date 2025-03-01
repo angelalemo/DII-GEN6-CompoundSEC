@@ -15,6 +15,13 @@ abstract class Card {
         this.accessCard = new Staff();
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public String getNumber() {
+        return number;
+    }
 
     public String canAccess() {
         return accessCard.canAccess();
@@ -43,6 +50,7 @@ abstract class Card {
     public String getDetails() {
         return "Card Holder: " + username + ", ID: " + number;
     }
+
 
 
     public void deleteCard(){

@@ -1,14 +1,19 @@
 
 import java.util.Objects;
 import java.util.Scanner;
+import java.time.LocalDateTime;
 
 
 public class main {
     static CustomerCard[][] Guest = new CustomerCard[5][20];
     static CustomerCard[] Tenet = new CustomerCard[10];
     static CustomerCard[][] Follower = new CustomerCard[10][200];
+    static Room [][] Guestroom = new GuestRoom [5][20];
+    static Room [] meetingroom = new MeetingRoom [10];
+    static Room NotfoundRoom = new StaffRoom("Notfound","Notfound",new StaffRoomAccess());
+    static LocalDateTime now = LocalDateTime.now();
 
-    static Card findslotcard (int x){
+    static Card findslotcard (int x,int y){
         if(x == 1){for (int i = 0 ; i< 5 ;i++){
             for (int j = 0; j< 20;j++){
                 if(!Objects.equals(Guest[i][j].getAccessCard(), new Owner())){
@@ -21,8 +26,8 @@ public class main {
             }else if (x == 3){
             for (int i = 0 ; i< 10 ;i++){
                 for (int j = 0; j< 200;j++){
-                    if(!Objects.equals(Follower[i][j].getAccessCard(), new Follower())){
-                        return  Follower[i][j];
+                    if(!Objects.equals(Follower[y-1][j].getAccessCard(), new Follower())){
+                        return  Follower[y-1][j];
                     }}}}
         return NotfoundCard;
     }
@@ -64,30 +69,46 @@ public class main {
             }
         }
         Scanner get = new Scanner(System.in);
-        System.out.print("Room number: ");
-        int x = input.nextInt();
-        System.out.println("=============================================================================================================");
+        Scanner get1 = new Scanner(System.in);
+        String number;
+        while (true) {
+            System.out.print("Room number: ");
+            number = get.nextLine();
+            if(number.length() < 4){
+                break;
+            }
+        }
         if (RoomorHall.equals("room")) {
-            String number = String.valueOf(x);
+            String fl = number.substring(0, 1);
+            int floor = Integer.parseInt(fl);
+            int room = 0;
+            if (number.length() == 2){String ro = number.substring(1, 2);
+                room = Integer.parseInt(ro);
+            } else if (number.length() == 3) {String ro = number.substring(1, 3);
+                room = Integer.parseInt(ro);
+            }
             System.out.print("Your ID: ");
-            String ID = get.nextLine();
-            CustomerCard slotcard = (CustomerCard) findslotcard(1);
-            slotcard = new CustomerCard(name,number  , RoomorHall, new Owner(),ID);
-            slotcard.getdecryptID();
-            slotcard.getID();
+            String ID = get1.nextLine();
+            String roomnumber = "GR"+number;
+            Guest[floor-1][room-1] =new CustomerCard(name,roomnumber , RoomorHall, new Owner(),ID);
+            Guestroom[floor-1][room-1] = new GuestRoom(roomnumber,ID,new ReservedRoomAccess(),name);
         } else {
             if (owner) {
-                String number = String.valueOf(x);
+                int room = Integer.parseInt(number);
                 System.out.print("Your ID: ");
                 String ID = get.nextLine();
-                CustomerCard slotcard = (CustomerCard) findslotcard(2);
-                slotcard = new CustomerCard(name, number , RoomorHall, new Owner(),ID);
+                String roomnumber = "MR"+number;
+                Tenet[room-1] = new CustomerCard(name,roomnumber , RoomorHall, new Owner(),ID);
+                System.out.println();
+                System.out.print("Number of followers : ");
+                int numfollower = get.nextInt();
+                meetingroom[room-1] = new MeetingRoom(roomnumber ,ID ,new RentedPlaceAccess() ,name ,numfollower);
                 for (int i =0 ; i<200;i++){
-                    Follower[x][i].setID(ID);
+                    Follower[room-1][i].setID(ID);
                 }
             } else {
-                String number = String.valueOf(x);
-                Card slotcard = findslotcard(3);
+                int room = Integer.parseInt(number);
+                Card slotcard = findslotcard(3,room);
                 slotcard = new CustomerCard(name, number , RoomorHall, new Follower());
             }
         }
@@ -192,18 +213,21 @@ public class main {
     static Card checkCard(String x) {
         for (int i = 0; i < 5; i++) {
             for(int j = 0; j <20;j++ ){
-            if (Objects.equals(x, Guest[i][j].getID())) {
+            if (Objects.equals(x, Guest[i][j].getdecryptID())) {
+                Guest[i][j].encryptID();
                 return Guest[i][j];
             }}
         }
         for (int i = 0; i < 10; i++) {
-            if (Objects.equals(x, Tenet[i].getID())) {
+            if (Objects.equals(x, Tenet[i].getdecryptID())) {
+                Tenet[i].encryptID();
                 return Tenet[i];
             }
         }
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 200; j++) {
-                if (Objects.equals(x, Follower[i][j].getID())) {
+                if (Objects.equals(x, Follower[i][j].getdecryptID())) {
+                    Follower[i][j].encryptID();
                     return Follower[i][j];
                 }
             }
@@ -251,11 +275,13 @@ public class main {
         System.out.println("=============================================================================================================");
         int mod = input.nextInt();
         String change;
+        String card = x.getnumber();
         switch (mod) {
             case 1:
                 System.out.print("New Username: ");
                 change = input.nextLine();
                 x.setUsername(change);
+
                 System.out.println("Modify Username complete");
                 break;
             case 2:
@@ -298,7 +324,7 @@ public class main {
                 System.out.print("New ID: ");
                 change = input.nextLine();
                 x.setID(change);
-                System.out.println("Modify Username complete");
+                System.out.println("New ID complete");
                 break;
             case 4:
                 System.out.print("Are you sure you want to delete this card?(Yes/yes to delete)");
@@ -428,11 +454,6 @@ public class main {
         }
     }
 
-
-    static Room [][] Guestroom = new GuestRoom [5][20];
-    static Room [] meetingroom = new MeetingRoom [10];
-    static Room NotfoundRoom = new StaffRoom("Notfound","Notfound",new StaffRoomAccess());
-
     public static Room checkRoom(String x){
         for (int i = 0; i < 5; i++) {
             for(int j = 0; j <20;j++ ){
@@ -509,6 +530,20 @@ public class main {
         }
     }
 
+    static void Usageinformation() {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter the name or code of the room you want to view usage information: ");
+        String ID = input.nextLine();
+        System.out.println(ID);
+        System.out.println("=============================================================================================================");
+        Room mod = checkRoom(ID);
+        if (Objects.equals(mod.getNameOrCode(), "Notfound")) {
+            System.out.println("Room not found matching the entered value.");
+        } else {
+            mod.getUsageinfo();
+        }
+
+    }
     public static void roommenu(){
         Scanner input = new Scanner(System.in);
         System.out.println("=============================================================================================================");
@@ -522,6 +557,49 @@ public class main {
             modifyCard();
         }
     }
+
+    static Card checkemc(String x) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 1000; j++) {
+                if (Objects.equals(x, Employeelist[i][j].getnumber())) {
+                    return Employeelist[i][j];
+                }
+            }
+        }
+        return NotfoundCard;
+    }
+
+    public static void checkroomentry(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("=============================================================================================================");
+        System.out.print("Enter in the ID of the card: ");
+        String ID = input.nextLine();
+        System.out.print("Specify the name or ID of the room you want to enter: ");
+        String Room = input.nextLine();
+        Card employeeCard = checkemc(ID);
+        CustomerCard customerCard = (CustomerCard) checkCard(ID);
+        Room room = checkRoom(Room);
+        String use ;
+        if(room.canAccess(employeeCard.canAccess())){
+            use = STR."\{employeeCard.getUsername()} \{employeeCard.getNumber()} \{now.toString()} Access Approval";
+            room.importUsageinfo(use);
+            System.out.println("Access Approval");
+            room.getUsageinfo();
+        }
+        else if (room.canAccess(customerCard.canAccess())) {
+            if (Objects.equals(customerCard.getdecryptID(), room.getID())){
+                use = STR."\{customerCard.getUsername()} \{customerCard.getNumber()} \{now.toString()} Access Approval";
+                room.importUsageinfo(use);
+                System.out.println("Access Approval");
+                room.getUsageinfo();
+                customerCard.encryptID();
+            }else {
+                System.out.println("Access Denied");
+        }}else {
+            System.out.println("Access Denied");
+        }
+    }
+
 
     public static void main(String[] args) {
         for (int i = 0; i < 4; i++) {
@@ -544,6 +622,9 @@ public class main {
                 Follower[i][j] = new CustomerCard();
             }
         }
+        CustomerCard gr;
+        Guest[0][1] = new CustomerCard("mark","GR01","room",new Owner(),"767988");
+        Guestroom[0][1] = new GuestRoom("GR01","767988",new ReservedRoomAccess(),"mark");
         Scanner input = new Scanner(System.in);
         while (true) {
             System.out.println();
@@ -555,8 +636,10 @@ public class main {
             int menu = input.nextInt();
             if (menu == 1) {
                 cardmenu();
-            }if (menu == 2){
+            } else if (menu == 2){
                 roommenu();
+            } else if (menu == 3) {
+                checkroomentry();
             }
         }
     }
