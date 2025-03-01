@@ -275,13 +275,13 @@ public class main {
         System.out.println("=============================================================================================================");
         int mod = input.nextInt();
         String change;
-        String card = x.getnumber();
+        Room modroom = checkRoom(x.getnumber());
+        Scanner get = new Scanner(System.in);
         switch (mod) {
             case 1:
                 System.out.print("New Username: ");
-                change = input.nextLine();
+                change = get.nextLine();
                 x.setUsername(change);
-
                 System.out.println("Modify Username complete");
                 break;
             case 2:
@@ -289,32 +289,24 @@ public class main {
                     System.out.println("1.Room");
                     System.out.println("2.Meeting Room");
                     System.out.println("=============================================================================================================");
-                    int rom = input.nextInt();
+                    int rom = get.nextInt();
                     System.out.print("New Room Number");
                     String num = input.nextLine();
                     if (rom == 1) {
                         x.setRoomOrHall("room");
                         x.setNumber(STR."GR\{num}");
                         x.setAccessCard(new Owner());
+                        modroom.setNameOrCode(STR."GR\{num}");
                         System.out.println("Modify Room Number complete");
                         break;
                     } else if (rom == 2) {
                         x.setRoomOrHall("meeting room");
                         while (true) {
-                            System.out.println("1.Owner");
-                            System.out.println("2.Follower");
-                            int oof = input.nextInt();
-                            if (oof == 1) {
                                 x.setNumber(STR."MR\{num}");
                                 x.setAccessCard(new Owner());
+                                modroom.setNameOrCode(STR."GR\{num}");
                                 System.out.println("Modify Room Number complete");
                                 break;
-                            } else if (oof == 2) {
-                                x.setNumber(STR."MR\{num}");
-                                x.setAccessCard(new Follower());
-                                System.out.println("Modify Room Number complete");
-                                break;
-                            }
                         }
                     }
                     break;
@@ -322,13 +314,14 @@ public class main {
                 break;
             case 3:
                 System.out.print("New ID: ");
-                change = input.nextLine();
+                change = get.nextLine();
                 x.setID(change);
+                modroom.setID(change);
                 System.out.println("New ID complete");
                 break;
             case 4:
                 System.out.print("Are you sure you want to delete this card?(Yes/yes to delete)");
-                String delete = input.nextLine();
+                String delete = get.nextLine();
                 if (Objects.equals(delete, "yes") || Objects.equals(delete, "Yes")) {
                     x.deleteCard();
                     System.out.println("Modify Delete Card complete");
@@ -345,10 +338,11 @@ public class main {
         System.out.println("3.Delete Card");
         System.out.println("=============================================================================================================");
         int mod = input.nextInt();
+        Scanner get = new Scanner(System.in);
         String change;
         if (mod == 1) {
             System.out.print("New Username: ");
-            change = input.nextLine();
+            change = get.nextLine();
             x.setUsername(change);
             System.out.println("Modify Username complete");
         } else if (mod == 2) {
@@ -372,8 +366,7 @@ public class main {
             switch (roh) {
                 case 1:
                     System.out.print("Role name: ");
-                    role = input.nextLine();
-                    input.nextLine();
+                    role = get.nextLine();
                     ID = STR."ST\{GenID(roh).substring(2)}";
                     x.setRole(role);
                     x.setNumber(ID);
@@ -382,8 +375,7 @@ public class main {
                     break;
                 case 2:
                     System.out.print("Role name: ");
-                    role = input.nextLine();
-                    input.nextLine();
+                    role = get.nextLine();
                     ID = STR."HO\{GenID(roh).substring(2)}";
                     x.setRole(role);
                     x.setNumber(ID);
@@ -392,8 +384,7 @@ public class main {
                     break;
                 case 3:
                     System.out.print("Role name: ");
-                    role = input.nextLine();
-                    input.nextLine();
+                    role = get.nextLine();
                     ID = STR."SE\{GenID(roh).substring(2)}";
                     x.setRole(role);
                     x.setNumber(ID);
@@ -402,8 +393,7 @@ public class main {
                     break;
                 case 4:
                     System.out.print("Role name: ");
-                    role = input.nextLine();
-                    input.nextLine();
+                    role = get.nextLine();
                     ID = STR."MA\{GenID(roh).substring(2)}";
                     x.setRole(role);
                     x.setNumber(ID);
@@ -413,7 +403,7 @@ public class main {
             }
         } else if (mod == 3) {
             System.out.print("Are you sure you want to delete this card?(Yes/yes to delete)");
-            String delete = input.nextLine();
+            String delete = get.nextLine();
             if (Objects.equals(delete, "yes") || Objects.equals(delete, "Yes")) {
                 x.deleteCard();
                 System.out.println("Modify Delete Card complete");
@@ -425,13 +415,12 @@ public class main {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter the card ID you want to modify: ");
         String ID = input.nextLine();
-        System.out.println(ID);
         System.out.println("=============================================================================================================");
         Card Modcard = checkCard(ID);
         if (Objects.equals(Modcard.getnumber(), "Notfound")) {
             System.out.println("Card ID not found matching the entered value.");
         } else {
-            if (customeroremployee(ID)) {
+            if (customeroremployee(Modcard.getnumber())) {
                 modcustomer((CustomerCard) Modcard);
             } else {
                 modemployee((EmployeeCard) Modcard);
@@ -554,7 +543,7 @@ public class main {
         if (menu == 1) {
             changeAccess();
         } else if (menu == 2) {
-            modifyCard();
+            Usageinformation();
         }
     }
 
@@ -622,7 +611,6 @@ public class main {
                 Follower[i][j] = new CustomerCard();
             }
         }
-        CustomerCard gr;
         Guest[0][1] = new CustomerCard("mark","GR01","room",new Owner(),"767988");
         Guestroom[0][1] = new GuestRoom("GR01","767988",new ReservedRoomAccess(),"mark");
         Scanner input = new Scanner(System.in);

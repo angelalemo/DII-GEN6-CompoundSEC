@@ -35,6 +35,10 @@ abstract class Room {
         return ID;
     }
 
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
     public void setAccessStrategy(AccessStrategy accessStrategy) {
         this.accessStrategy = accessStrategy;
     }
