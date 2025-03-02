@@ -47,16 +47,16 @@ abstract class Card {
         return accessCard;
     }
 
-    public String getDetails() {
-        return "Card Holder: " + username + ", ID: " + number;
+    public void getCardDetails() {
+        System.out.println("Card Holder: "+username+", ID: "+number);
     }
 
 
 
     public void deleteCard(){
-        username = null;
-        number = null;
-        accessCard = null;
+        username = " ";
+        number = " ";
+        accessCard = new Staff();
     }
 
 }

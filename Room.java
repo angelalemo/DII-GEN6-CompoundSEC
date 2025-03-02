@@ -6,6 +6,7 @@ abstract class Room {
     private AccessStrategy accessStrategy;
     private ArrayList<String> Usageinfo = new ArrayList<>();
 
+
     // Constructor
     public Room(String nameOrCode, String ID, AccessStrategy accessStrategy) {
         this.nameOrCode = nameOrCode;
@@ -51,10 +52,9 @@ abstract class Room {
         Usageinfo.add(input);
     }
 
-    private String combinedString = String.join(" ", Usageinfo);
-
-    public String getUsageinfo() {
-        return "\nUsageinfo: "+combinedString;
+    public void getUsageinfo() {
+        String combinedString = String.join(" ", Usageinfo);
+        System.out.println( "Usageinfo: "+combinedString);
     }
 
     @Override

@@ -46,11 +46,13 @@ class CustomerCard extends Card {
 
     public void deleteCard(){
         super.deleteCard();
-        roomOrHall = null;
-        ID = null;
+        roomOrHall = " ";
+        ID = " ";
     }
-    public String getCardDetails() {
-        return super.toString() + ", Room/Hall: " + roomOrHall;
+    public void getCardDetails() {
+        super.getCardDetails();
+        System.out.println("RoomorHall: "+roomOrHall+", ID: "+ID);
+
     }
 
     public void encryptID() {
@@ -70,11 +72,7 @@ class CustomerCard extends Card {
             }
         }
 
-    public void encryptID(String x) {
-        if (ID != null) {
-            String encryptedID = Base64.getEncoder().encodeToString((x + now.toString()).getBytes());
-            this.ID = encryptedID;
-        }
+
     }
-}
+
 

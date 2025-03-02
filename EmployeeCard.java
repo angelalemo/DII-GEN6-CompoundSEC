@@ -29,7 +29,8 @@ class EmployeeCard extends Card {
         role = null;
     }
 
-    public String getCardDetails() {
-        return super.toString() + ", Role: " + role;
+    public void getCardDetails() {
+        super.getCardDetails();
+        System.out.println("Role: "+role);
     }
 }

@@ -112,6 +112,7 @@ public class main {
                 slotcard = new CustomerCard(name, number , RoomorHall, new Follower());
             }
         }
+        System.out.println("Add card complete");
     }
 
     static int[][] numID = new int[4][3];
@@ -196,15 +197,15 @@ public class main {
         System.out.println("=============================================================================================================");
         System.out.println("1.Customer Card");
         System.out.println("2.Employee Card");
-        System.out.println("3.Return to Card Management");
         System.out.println("=============================================================================================================");
+        System.out.print("Type Card: ");
         int menu = input.nextInt();
         if (menu == 1) {
             customer();
-        } else if (menu == 2) {
+        }else if (menu == 2) {
             employee();
-        } else if (menu == 3) {
-            cardmenu();
+        }else {
+            System.out.println("The received does not match what was specified.");
         }
     }
 
@@ -216,20 +217,21 @@ public class main {
             if (Objects.equals(x, Guest[i][j].getdecryptID())) {
                 Guest[i][j].encryptID();
                 return Guest[i][j];
-            }}
+            }else {Guest[i][j].encryptID();}
+            }
         }
         for (int i = 0; i < 10; i++) {
             if (Objects.equals(x, Tenet[i].getdecryptID())) {
                 Tenet[i].encryptID();
                 return Tenet[i];
-            }
+            }else {Tenet[i].encryptID();}
         }
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 200; j++) {
                 if (Objects.equals(x, Follower[i][j].getdecryptID())) {
                     Follower[i][j].encryptID();
                     return Follower[i][j];
-                }
+                }else {Follower[i][j].encryptID();}
             }
         }
         for (int i = 0; i < 4; i++) {
@@ -270,7 +272,7 @@ public class main {
         System.out.println("1.Modify Username");
         System.out.println("2.Modify Room Number");
         System.out.println("3.New ID");
-        System.out.println("4.Modify Access");
+        System.out.println("4.Get Detail");
         System.out.println("5.Delete Card");
         System.out.println("=============================================================================================================");
         int mod = input.nextInt();
@@ -319,7 +321,7 @@ public class main {
                 modroom.setID(change);
                 System.out.println("New ID complete");
                 break;
-            case 4:
+            case 5:
                 System.out.print("Are you sure you want to delete this card?(Yes/yes to delete)");
                 String delete = get.nextLine();
                 if (Objects.equals(delete, "yes") || Objects.equals(delete, "Yes")) {
@@ -327,6 +329,10 @@ public class main {
                     System.out.println("Modify Delete Card complete");
                 }
                 break;
+            case 4:
+                x.getCardDetails();
+                break;
+            default: System.out.println("The received does not match what was specified.");
         }
     }
 
@@ -435,11 +441,14 @@ public class main {
         System.out.println("1.Add Card");
         System.out.println("2.Modify/Delete Card");
         System.out.println("=============================================================================================================");
+        System.out.print("Answer: ");
         int menu = input.nextInt();
         if (menu == 1) {
             addCard();
         } else if (menu == 2) {
             modifyCard();
+        } else {
+            System.out.println("The received does not match what was specified.");
         }
     }
 
@@ -523,7 +532,6 @@ public class main {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter the name or code of the room you want to view usage information: ");
         String ID = input.nextLine();
-        System.out.println(ID);
         System.out.println("=============================================================================================================");
         Room mod = checkRoom(ID);
         if (Objects.equals(mod.getNameOrCode(), "Notfound")) {
@@ -537,13 +545,16 @@ public class main {
         Scanner input = new Scanner(System.in);
         System.out.println("=============================================================================================================");
         System.out.println("1.Change room status");
-        System.out.println("2.Get room detail");
+        System.out.println("2.Get Usage information");
         System.out.println("=============================================================================================================");
+        System.out.print("Answer: ");
         int menu = input.nextInt();
         if (menu == 1) {
             changeAccess();
         } else if (menu == 2) {
             Usageinformation();
+        } else {
+            System.out.println("The received does not match what was specified.");
         }
     }
 
@@ -572,20 +583,29 @@ public class main {
         if(room.canAccess(employeeCard.canAccess())){
             use = STR."\{employeeCard.getUsername()} \{employeeCard.getNumber()} \{now.toString()} Access Approval";
             room.importUsageinfo(use);
-            System.out.println("Access Approval");
+            System.out.println("Access Approval!!!");
             room.getUsageinfo();
+            customerCard.encryptID();
         }
         else if (room.canAccess(customerCard.canAccess())) {
             if (Objects.equals(customerCard.getdecryptID(), room.getID())){
                 use = STR."\{customerCard.getUsername()} \{customerCard.getNumber()} \{now.toString()} Access Approval";
                 room.importUsageinfo(use);
-                System.out.println("Access Approval");
+                System.out.println("Access Approval!!!");
                 room.getUsageinfo();
                 customerCard.encryptID();
             }else {
-                System.out.println("Access Denied");
+                use = STR."\{customerCard.getUsername()} \{customerCard.getNumber()} \{now.toString()} Access Denied";
+                room.importUsageinfo(use);
+                System.out.println("Access Denied!!!");
+                room.getUsageinfo();
+                customerCard.encryptID();
         }}else {
-            System.out.println("Access Denied");
+            use = STR."\{customerCard.getUsername()} \{customerCard.getNumber()} \{now.toString()} Access Denied";
+            room.importUsageinfo(use);
+            System.out.println("Access Denied!!!");
+            room.getUsageinfo();
+            customerCard.encryptID();
         }
     }
 
@@ -621,6 +641,7 @@ public class main {
             System.out.println("2.Room Management");
             System.out.println("3.Check");
             System.out.println("=============================================================================================================");
+            System.out.print("Answer: ");
             int menu = input.nextInt();
             if (menu == 1) {
                 cardmenu();
@@ -628,6 +649,8 @@ public class main {
                 roommenu();
             } else if (menu == 3) {
                 checkroomentry();
+            } else {
+                System.out.println("The received does not match what was specified.");
             }
         }
     }
